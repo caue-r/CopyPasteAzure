@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "CopyPasteAzure",
+  "version": "1.0.0",
+  "description": "Copia título, descrição, critérios de aceite e comentários de um work item do Azure DevOps como texto limpo.",
+  "permissions": ["activeTab", "scripting", "clipboardWrite"],
+  "host_permissions": ["https://dev.azure.com/*", "https://*.visualstudio.com/*"],
+  "action": {
+    "default_title": "Copiar work item",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Alt+Shift+C" },
+      "description": "Copiar o work item aberto"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://dev.azure.com/*", "https://*.visualstudio.com/*"],
+      "js": ["formatter.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
